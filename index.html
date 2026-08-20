@@ -119,6 +119,18 @@
   section[style*="margin-top:-84px"] p{font-size:0.88rem!important;max-width:90vw!important;}
   /* Titre tronqué */
   h2{white-space:normal!important;word-break:break-word!important;font-size:clamp(1.6rem,6vw,2.5rem)!important;}
+  /* Hero texte : fond arrondi pour lisibilité */
+  .hero-content{padding:0 0 20px!important;}
+  .hero-content h1,.hero-content p,.hero-content>div:last-child{
+    background:rgba(8,28,16,0.72);
+    backdrop-filter:blur(4px);
+    border-radius:18px;
+    padding:14px 16px!important;
+    margin:4px 12px!important;
+    pointer-events:auto;
+  }
+  .hero-content h1{font-size:clamp(1.6rem,6vw,2.4rem)!important;margin-bottom:0!important;}
+  .hero-content p{margin-top:0!important;}
   /* Avis clients : 1 colonne visible */
   .review-mask{height:420px!important;}
   .review-mask>div{grid-template-columns:1fr!important;gap:0!important;}
@@ -200,7 +212,7 @@
         <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,30,18,0.35) 0%,rgba(10,30,18,0) 40%);"></div>
       </div>
 
-      <div style="position:relative;height:100%;max-width:1180px;margin:0 auto;padding:0 28px 120px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;z-index:3;pointer-events:none;">
+      <div class="hero-content" style="position:relative;height:100%;max-width:1180px;margin:0 auto;padding:0 28px 120px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;z-index:3;pointer-events:none;">
         <div class="hero-badge" style="display:inline-flex;align-items:stretch;align-self:flex-start;border-radius:28px;overflow:hidden;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.28);backdrop-filter:blur(10px);pointer-events:auto;">
           <span style="display:flex;align-items:center;padding:9px 18px;background:linear-gradient(135deg,#C9A961,#B8924A);color:#0E2A16;font-weight:800;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;">Normandie</span>
           <span style="display:flex;align-items:center;padding:9px 18px;color:#fff;font-size:0.78rem;font-weight:500;">Suites scandinaves</span>
@@ -2000,7 +2012,7 @@ class Component extends DCLogic {
       mapSelKind:s.mapSel?(({suite:'Hébergement', etang:'Point d\'eau', restaurant:'Restauration', accueil:'Services', foret:'Nature & bien-être'})[MAP_POINTS.find(p=>p.id===s.mapSel).type]||"Point d'intérêt"):'',
       mapSelTitle:s.mapSel?MAP_POINTS.find(p=>p.id===s.mapSel).title:'',
       mapSelDesc:s.mapSel?MAP_POINTS.find(p=>p.id===s.mapSel).desc:'',
-      mapSelPhoto:s.mapSel?MAP_POINTS.find(p=>p.id===s.mapSel).photo:'',
+      mapSelPhoto:s.mapSel&&window.innerWidth>=500?MAP_POINTS.find(p=>p.id===s.mapSel).photo:'',
       mapCardStyle: (()=>{
         if(!s.mapSel) return '';
         const p = MAP_POINTS.find(pt=>pt.id===s.mapSel);
