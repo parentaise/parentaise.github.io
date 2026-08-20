@@ -72,7 +72,7 @@
   .flip-card:hover .flip-inner{transform:rotateY(180deg);}
   .flip-face{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:38px;overflow:hidden;}
   .flip-back{transform:rotateY(180deg);}
-  @media (hover:none){.flip-card:hover .flip-inner{transform:none;}}
+  @media (hover:none){.flip-card:hover .flip-inner{transform:none;}.flip-card.flipped .flip-inner{transform:rotateY(180deg);}}
 .brand-wordmark{font-family:'Fraunces',serif;font-style:italic;font-weight:600;color:#14301F;font-size:1.15rem;cursor:pointer;transition:opacity .2s ease;white-space:nowrap;user-select:none;}
 .brand-wordmark:hover{opacity:.65;}
 
@@ -95,6 +95,21 @@
   .veg-branch{stroke-dashoffset:0!important;}
   .veg-leaf{opacity:1!important;}
   .veg-leaf-scale{transform:none!important;}
+}
+@media(max-width:768px){
+  /* Header/menu */
+  header{padding:0 8px!important;}
+  header>div{gap:10px!important;padding:8px!important;}
+  nav{gap:14px!important;font-size:0.78rem!important;}
+  nav a{white-space:nowrap;}
+  /* Hero */
+  section[style*="margin-top:-84px"] div[style*="height:92vh"]{height:60vh!important;min-height:380px!important;}
+  /* Badge Normandie + texte hero : espace sous le menu sticky */
+  section[style*="margin-top:-84px"] div[style*="padding:0 28px"]{padding-top:70px!important;padding-left:18px!important;padding-right:18px!important;}
+  /* Texte "Douze suites premium" */
+  section[style*="margin-top:-84px"] p{font-size:0.88rem!important;max-width:90vw!important;}
+  /* Titre tronqué */
+  h2{white-space:normal!important;word-break:break-word!important;font-size:clamp(1.6rem,6vw,2.5rem)!important;}
 }
 </style>
 </helmet>
@@ -154,8 +169,8 @@
     <div style="position:relative;height:92vh;min-height:640px;overflow:hidden;border-radius:{{ heroCurve }};background:#0E2A16;" onMouseEnter="{{ heroEnter }}" onMouseLeave="{{ heroLeave }}">
 
       <!-- deux vidéos superposées : on alterne entre les deux pour créer un fondu enchaîné entre les 3 clips de la séquence (outside → inside → domaine) -->
-      <video id="heroVideoA" muted loop playsInline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;opacity:1;transition:opacity 1s ease;"></video>
-      <video id="heroVideoB" muted loop playsInline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;opacity:0;transition:opacity 1s ease;"></video>
+      <video id="heroVideoA" muted loop playsInline autoplay preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;opacity:1;transition:opacity 1s ease;"></video>
+      <video id="heroVideoB" muted loop playsInline autoplay preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;opacity:0;transition:opacity 1s ease;"></video>
 
       <!-- volet gauche : moitié gauche de la photo (image entière, mais on ne montre que la moitié gauche via clip-path) -->
       <div style="position:absolute;inset:0;z-index:2;clip-path:inset(0 50% 0 0);transition:transform 1s cubic-bezier(.65,0,.35,1);transform:{{ heroLeftTransform }};will-change:transform;">
@@ -2053,6 +2068,21 @@ class Component extends DCLogic {
     };
   }
 }
+</script>
+<script>
+// Flip cards touch support (mobile)
+(function(){
+  if(!window.matchMedia('(hover:none)').matches) return;
+  document.addEventListener('click', function(e){
+    const card = e.target.closest('.flip-card');
+    if(!card) return;
+    if(!card.classList.contains('flipped')){
+      e.stopPropagation();
+      document.querySelectorAll('.flip-card.flipped').forEach(c=>c.classList.remove('flipped'));
+      card.classList.add('flipped');
+    }
+  }, true);
+})();
 </script>
 </body>
 </html>
