@@ -961,7 +961,7 @@
         <div style="position:relative;height:440px;overflow:hidden;background:#0E2A16;">
           <img src="./plan-domaine.jpg" alt="Plan du domaine vu du ciel" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
           <sc-for list="{{ mapPoints }}" as="p" hint-placeholder-count="15">
-            <div onMouseEnter="{{ p.select }}" onMouseLeave="{{ p.deselect }}" style="{{ p.style }}">
+            <div onMouseEnter="{{ p.select }}" onMouseLeave="{{ p.deselect }}" onClick="{{ p.select }}" style="{{ p.style }}">
               <svg width="26" height="34" viewBox="0 0 26 34" style="filter:drop-shadow(0 4px 5px rgba(0,0,0,0.35));display:block;">
                 <path d="M13 1C6.4 1 1 6.4 1 13c0 8.5 12 20 12 20s12-11.5 12-20C25 6.4 19.6 1 13 1Z" fill="{{ p.pinColor }}" stroke="#fff" stroke-width="2"/>
                 <circle cx="13" cy="13" r="4.6" fill="#fff"/>
@@ -2009,11 +2009,12 @@ class Component extends DCLogic {
         // chevaucher le bandeau blanc du haut de la modale.
         const showBelow = p.y < 42;
         const vOffset = showBelow ? 'translateY(18px)' : 'translateY(calc(-100% - 40px))';
-        const cardWidth = p.photo ? 320 : 210;
+        const mapContainerW = Math.min(900, window.innerWidth - 40);
+        const cardWidth = Math.min(p.photo ? 320 : 210, mapContainerW - 20);
         // Décalage horizontal adaptatif : si le point est trop proche d'un bord pour que
         // la carte centrée tienne entièrement dans le cadre, on la colle au point plutôt
         // que de la centrer, en s'étendant vers l'intérieur.
-        const halfPct = (cardWidth/2/900)*100; // largeur approx. du cadre de la carte : 900px
+        const halfPct = (cardWidth/2/mapContainerW)*100; // largeur réelle du conteneur carte
         let hOffset = 'translateX(-50%)';
         if(p.x < halfPct + 6) hOffset = 'translateX(-8px)';
         else if(p.x > 100 - halfPct - 6) hOffset = 'translateX(calc(-100% + 8px))';
