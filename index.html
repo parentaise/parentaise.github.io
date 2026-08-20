@@ -122,13 +122,12 @@
   /* Hero texte : fond arrondi pour lisibilité */
   .hero-content{padding:0 0 80px!important;}
   .hero-content h1{
-    background:rgba(8,28,16,0.52);
-    backdrop-filter:blur(4px);
     border-radius:18px 18px 0 0;
     padding:14px 16px 8px!important;
     margin:4px 12px 0!important;
     font-size:clamp(1.6rem,6vw,2.4rem)!important;
   }
+  .hero-cta{font-size:0.74rem!important;padding:10px 16px!important;margin:8px 12px!important;}
   .hero-content p{
     background:rgba(8,28,16,0.52);
     backdrop-filter:blur(4px);
@@ -225,7 +224,7 @@
         <h1 style="font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:clamp(2.8rem,6vw,4.8rem);line-height:1.02;letter-spacing:-0.03em;margin:22px 0 18px;max-width:14ch;text-wrap:pretty;">Une parenthèse au cœur du <span style="color:#C9A961;">vivant</span></h1>
         <p style="font-size:1.06rem;max-width:480px;color:rgba(255,255,255,0.88);margin-bottom:32px;">Douze suites premium sur 50 hectares préservés, pensées pour les parents qui ont parfois besoin d’une parenthèse : mettre le quotidien en pause, se retrouver et simplement redevenir soi.</p>
         <div style="display:flex;gap:14px;flex-wrap:wrap;pointer-events:auto;">
-          <button onClick="{{ openQuiz }}" class="btn-primary" style="font-size:0.98rem;padding:17px 32px;">Trouver la formule qui me correspond →</button>
+          <button onClick="{{ openQuiz }}" class="btn-primary hero-cta" style="font-size:0.98rem;padding:17px 32px;">Trouver la formule qui me correspond →</button>
         </div>
       </div>
     </div>
