@@ -872,16 +872,21 @@
               <div style="width:62px;height:62px;border-radius:50%;background:linear-gradient(140deg,#C9A961,#2F7A3A);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:20px;">✓</div>
               <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:1.7rem;letter-spacing:-0.02em;color:#14301F;margin-bottom:10px;">Réservation confirmée !</h2>
               <p style="color:#516155;font-size:0.95rem;">Merci, votre séjour est bien réservé. Vous allez recevoir un e-mail de confirmation avec tous les détails.</p>
-              <div style="display:flex;gap:16px;align-items:center;padding:18px;border-radius:30px;background:#F1F8EC;margin-top:24px;">
-                <div style="position:relative;width:78px;height:78px;border-radius:24px;overflow:hidden;flex-shrink:0;background:{{ recoColor }};">
-                  <img src="{{ recoImg }}" alt="{{ recoName }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+              <sc-for list="{{ confirmLines }}" as="cl" hint-placeholder-count="2">
+                <div style="display:flex;gap:16px;align-items:center;padding:18px;border-radius:30px;background:#F1F8EC;margin-top:12px;">
+                  <div style="position:relative;width:78px;height:78px;border-radius:24px;overflow:hidden;flex-shrink:0;background:{{ cl.color }};">
+                    <img src="{{ cl.img }}" alt="{{ cl.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+                  </div>
+                  <div>
+                    <sc-if value="{{ cl.showPerson }}" hint-placeholder-val="{{ false }}">
+                      <div style="font-size:0.75rem;font-weight:700;color:#2F7A3A;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2px;">{{ cl.personLabel }}</div>
+                    </sc-if>
+                    <b style="color:#14301F;">{{ cl.name }}</b>
+                  </div>
                 </div>
-                <div>
-                  <b style="color:#14301F;">{{ recoName }}</b>
-                  <div style="font-size:0.85rem;color:#516155;">{{ datesLabel }} · {{ voyageurs }}</div>
-                  <div style="font-weight:700;color:#2F7A3A;margin-top:4px;">{{ priceTotal }} payés</div>
-                </div>
-              </div>
+              </sc-for>
+              <div style="padding:14px 18px;border-radius:20px;background:#F1F8EC;margin-top:10px;font-size:0.85rem;color:#516155;">{{ datesLabel }} · {{ voyageurs }}</div>
+              <div style="font-weight:700;color:#2F7A3A;margin-top:8px;font-size:1rem;">{{ priceTotal }} payés</div>
               <div style="font-size:0.76rem;color:#2F7A3A;margin-top:12px;">Référence : {{ bookingRef }}</div>
               <button onClick="{{ closeQuiz }}" class="btn-tertiary" style="margin-top:26px;">Retour à l'accueil</button>
             </div>
@@ -1941,6 +1946,7 @@ class Component extends DCLogic {
           })
         };
       }),
+      confirmLines: pf.map((fId,i)=>{ const f=FORMULAS[fId]; return {name:f.name,color:f.color,img:f.img,showPerson:nPersons>1,personLabel:'Voyageur '+(i+1)}; }),
       priceBase:reco.price+' € TTC', priceTotal:this.total()+' € TTC',
       promo:s.promo, setPromo:e=>this.setState({promo:e.target.value}),
       applyPromo:()=>{
