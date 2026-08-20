@@ -121,16 +121,21 @@
   h2{white-space:normal!important;word-break:break-word!important;font-size:clamp(1.6rem,6vw,2.5rem)!important;}
   /* Hero texte : fond arrondi pour lisibilité */
   .hero-content{padding:0 0 20px!important;}
-  .hero-content h1,.hero-content p,.hero-content>div:last-child{
-    background:rgba(8,28,16,0.72);
+  .hero-content h1{
+    background:rgba(8,28,16,0.52);
     backdrop-filter:blur(4px);
-    border-radius:18px;
-    padding:14px 16px!important;
-    margin:4px 12px!important;
-    pointer-events:auto;
+    border-radius:18px 18px 0 0;
+    padding:14px 16px 8px!important;
+    margin:4px 12px 0!important;
+    font-size:clamp(1.6rem,6vw,2.4rem)!important;
   }
-  .hero-content h1{font-size:clamp(1.6rem,6vw,2.4rem)!important;margin-bottom:0!important;}
-  .hero-content p{margin-top:0!important;}
+  .hero-content p{
+    background:rgba(8,28,16,0.52);
+    backdrop-filter:blur(4px);
+    border-radius:0 0 18px 18px;
+    padding:8px 16px 14px!important;
+    margin:0 12px 8px!important;
+  }
   /* Avis clients : 1 colonne visible */
   .review-mask{height:420px!important;}
   .review-mask>div{grid-template-columns:1fr!important;gap:0!important;}
