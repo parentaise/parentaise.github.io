@@ -1236,6 +1236,13 @@ class Component extends DCLogic {
     };
     window.addEventListener('scroll', this._trajetMapScrollHandler, {passive:true});
 
+    // Colonnes d'avis : calculées une seule fois pour ne pas réinitialiser les animations CSS à chaque setState
+    this._reviewColumns = [0,1,2,3].map(col => {
+      const perCol = 6, start = col * perCol, items = [];
+      for(let k=0;k<perCol;k++) items.push(REVIEWS[(start+k)%REVIEWS.length]);
+      return { items:[...items,...items].map((r,i)=>({...r,key:col+'-'+i})), duration:(30+col*3)+'s', delay:(col*-5)+'s' };
+    });
+
     // Séquence des vidéos du hero, dans l'ordre. Le dernier clip boucle.
     this._heroSeq = ['./outside.mp4', './inside.mp4', './domaine.mp4'];
     this._heroStep = 0;
@@ -1993,21 +2000,7 @@ class Component extends DCLogic {
       closeMapBackdrop:e=>{ if(e.target.dataset.ov){ this.setState({mapOpen:false}); this._restoreFocus(); } },
 
       // 4 colonnes d'avis en défilement continu. Chaque colonne reçoit 6 avis distincts,
-      // puis on duplique la liste pour créer une boucle visuellement infinie (marquee vertical).
-      // Les 4 vitesses sont légèrement différentes pour éviter tout effet "métronome".
-      reviewColumns: [0,1,2,3].map(col => {
-        const perCol = 6;
-        const start = col * perCol;
-        const items = [];
-        for(let k=0; k<perCol; k++) items.push(REVIEWS[(start+k) % REVIEWS.length]);
-        // On duplique la liste : la seconde moitié est identique à la première,
-        // ce qui garantit un raccord invisible quand l'animation reboucle.
-        return {
-          items:[...items, ...items].map((r,i)=>({...r, key:col+'-'+i})),
-          duration: (30 + col*3)+'s',  // 30s / 33s / 36s / 39s
-          delay: (col*-5)+'s'          // décalage initial pour éviter la synchro
-        };
-      }),
+      reviewColumns: this._reviewColumns,
       mapPoints:MAP_POINTS.map(p=>({
         style:`position:absolute;left:${p.x}%;top:${p.y}%;transform:translate(-50%,-100%);cursor:pointer;transition:transform .15s ease;`,
         pinColor: ({suite:'#E23B3B', etang:'#2F80C4', restaurant:'#E08A1E', accueil:'#8E44C4', foret:'#2E9E4F'})[p.type] || '#B31D1D',
