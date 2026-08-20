@@ -120,7 +120,7 @@
   /* Titre tronqué */
   h2{white-space:normal!important;word-break:break-word!important;font-size:clamp(1.6rem,6vw,2.5rem)!important;}
   /* Hero texte : fond arrondi pour lisibilité */
-  .hero-content{padding:0 0 20px!important;}
+  .hero-content{padding:0 0 80px!important;}
   .hero-content h1{
     background:rgba(8,28,16,0.52);
     backdrop-filter:blur(4px);
@@ -2035,7 +2035,11 @@ class Component extends DCLogic {
         let hOffset = 'translateX(-50%)';
         if(p.x < halfPct + 6) hOffset = 'translateX(-8px)';
         else if(p.x > 100 - halfPct - 6) hOffset = 'translateX(calc(-100% + 8px))';
-        return `position:absolute;left:${p.x}%;top:${p.y}%;transform:${hOffset} ${vOffset};width:${cardWidth}px;display:flex;align-items:stretch;border-radius:20px;background:rgba(255,255,255,0.97);backdrop-filter:blur(6px);box-shadow:0 16px 32px -12px rgba(0,0,0,0.35);overflow:hidden;z-index:6;`;
+        const mobileCard = window.innerWidth < 500;
+        const posStyle = mobileCard
+          ? `position:absolute;left:50%;bottom:12px;transform:translateX(-50%);width:calc(100% - 24px);`
+          : `position:absolute;left:${p.x}%;top:${p.y}%;transform:${hOffset} ${vOffset};width:${cardWidth}px;`;
+        return posStyle+`display:flex;align-items:stretch;border-radius:20px;background:rgba(255,255,255,0.97);backdrop-filter:blur(6px);box-shadow:0 16px 32px -12px rgba(0,0,0,0.35);overflow:hidden;z-index:6;`;
       })(),
 
       toast:s.toast,
