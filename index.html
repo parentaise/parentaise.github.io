@@ -48,7 +48,7 @@
   .blob-1{width:600px;height:600px;background:radial-gradient(ellipse,rgba(47,122,58,0.28) 0%,transparent 65%);top:50%;right:-100px;transform:translateY(-50%);animation-duration:20s;}
   .blob-2{width:400px;height:400px;background:radial-gradient(ellipse,rgba(111,187,69,0.20) 0%,transparent 65%);top:50%;left:-80px;transform:translateY(-40%);animation-duration:15s;animation-delay:-7s;}
   @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes marqueeUp{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+  @keyframes marqueeUp{from{transform:translateY(0)}to{transform:translateY(calc(-50% - 10px))}}
   /* Apparition au scroll */
   .reveal{opacity:0;transform:translateY(8px);transition:opacity .6s cubic-bezier(.25,.46,.45,.94),transform .6s cubic-bezier(.25,.46,.45,.94);}
   .reveal.in{opacity:1;transform:none;}
