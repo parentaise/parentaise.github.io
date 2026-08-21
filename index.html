@@ -3,6 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="(parent)aise — Douze suites scandinaves premium en Normandie sur 50 hectares préservés. Une parenthèse nature pour les parents qui ont besoin de souffler.">
+<meta property="og:title" content="(parent)aise Normandie">
+<meta property="og:description" content="Douze suites premium au cœur du vivant. Déconnexion réelle, confort nordique, engagements éco-responsables prouvés.">
+<meta property="og:image" content="./img/hero-photo.webp">
+<meta property="og:type" content="website">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -255,7 +260,7 @@
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;">
         <div class="reveal lift zoomwrap" style="position:relative;overflow:hidden;padding:36px 32px 38px;border-radius:32px;min-height:300px;color:#fff;background:#123D22;">
-          <img class="zoomimg" src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=75&auto=format&fit=crop" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;">
+          <img class="zoomimg" src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=75&auto=format&fit=crop" alt="Sous-bois en forêt normande, lumière filtrée entre les arbres" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;">
           <div style="position:absolute;inset:0;background:linear-gradient(190deg,rgba(10,34,18,0.58) 15%,rgba(10,34,18,0.88) 78%);"></div>
           <div style="position:absolute;left:32px;right:32px;top:36px;">
             <div style="width:52px;height:52px;border-radius:50% 50% 50% 12px;background:linear-gradient(140deg,#C9A961,#2F7A3A);margin-bottom:22px;"></div>
@@ -264,7 +269,7 @@
           </div>
         </div>
         <div class="reveal lift zoomwrap d1" style="position:relative;overflow:hidden;padding:36px 32px 38px;border-radius:32px;min-height:300px;color:#fff;background:#123D22;">
-          <img class="zoomimg" src="./img/hero-photo.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;">
+          <img class="zoomimg" src="./img/hero-photo.webp" alt="Suite scandinave avec verrière sur la forêt" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;">
           <div style="position:absolute;inset:0;background:linear-gradient(190deg,rgba(10,34,18,0.58) 15%,rgba(10,34,18,0.88) 78%);"></div>
           <div style="position:absolute;left:32px;right:32px;top:36px;">
             <div style="width:52px;height:52px;border-radius:50% 12px 50% 50%;background:linear-gradient(140deg,#63B96E,#1E5A32);margin-bottom:22px;"></div>
@@ -273,7 +278,7 @@
           </div>
         </div>
         <div class="reveal lift zoomwrap d2" style="position:relative;overflow:hidden;padding:36px 32px 38px;border-radius:32px 36px 36px 36px;min-height:300px;color:#fff;background:#123D22;">
-          <img class="zoomimg" src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=1200&q=75&auto=format&fit=crop" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;">
+          <img class="zoomimg" src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=1200&q=75&auto=format&fit=crop" alt="Végétation naturelle préservée du domaine" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;">
           <div style="position:absolute;inset:0;background:linear-gradient(190deg,rgba(10,34,18,0.58) 15%,rgba(10,34,18,0.88) 78%);"></div>
           <div style="position:absolute;left:32px;right:32px;top:36px;">
             <div style="width:52px;height:52px;border-radius:12px 50% 50% 50%;background:linear-gradient(140deg,#A6DB6B,#4E9F4A);margin-bottom:22px;"></div>
@@ -979,7 +984,7 @@
           <p style="color:#516155;font-size:0.9rem;margin-top:6px;">Les 12 suites adoptent une disposition en cercle avec la terrasse tournée vers la nature, aucun <span style="white-space:nowrap">vis-à-vis</span> !</p>
         </div>
         <div style="position:relative;height:440px;overflow:hidden;background:#0E2A16;">
-          <img src="./plan-domaine.jpg" alt="Plan du domaine vu du ciel" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+          <img src="./img/plan-domaine.jpg" alt="Plan du domaine vu du ciel" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
           <sc-for list="{{ mapPoints }}" as="p" hint-placeholder-count="15">
             <div onMouseEnter="{{ p.select }}" onMouseLeave="{{ p.deselect }}" onClick="{{ p.select }}" style="{{ p.style }}">
               <svg width="26" height="34" viewBox="0 0 26 34" style="filter:drop-shadow(0 4px 5px rgba(0,0,0,0.35));display:block;">
@@ -1244,7 +1249,7 @@ class Component extends DCLogic {
     });
 
     // Séquence des vidéos du hero, dans l'ordre. Le dernier clip boucle.
-    this._heroSeq = ['./outside.mp4', './inside.mp4', './domaine.mp4'];
+    this._heroSeq = ['./videos/outside.mp4', './videos/inside.mp4', './videos/domaine.mp4'];
     this._heroStep = 0;
     this._heroActive = 'A'; // laquelle des deux balises est visible en ce moment
     this._heroCrossfadeMs = 1000; // durée du fondu (doit rester ≤ transition CSS)
